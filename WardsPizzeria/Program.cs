@@ -13,16 +13,14 @@ namespace WardsPizzeria
 
         private static void Main(string[] args)
         {
-            pizzaList.Add(new Pizza(1, "Margherita", "Kaas, tomatensaus, kruiden", true, 5.0));
-            pizzaList.Add(new Pizza(1, "Funghi", "Kaas, tomatensaus, champignons, kruiden", true, 6.0));
-            pizzaList.Add(new Pizza(1, "Prosciutto", "Kaas, tomatensaus, hesp, kruiden", true, 5.0));
+            //pizzaList.Add(new Pizza(1, "Margherita", "Kaas, tomatensaus, kruiden", true, 5.0));
+            //pizzaList.Add(new Pizza(1, "Funghi", "Kaas, tomatensaus, champignons, kruiden", true, 6.0));
+            //pizzaList.Add(new Pizza(1, "Prosciutto", "Kaas, tomatensaus, hesp, kruiden", true, 5.0));
             Program p = new Program();
             // p.WritePizzasToFile();
             p.ReadPizzasFromFile();
-            foreach (Pizza pizza in pizzaList)
-            {
-                Console.WriteLine(pizza.Name);
-            }
+
+  
         }
 
         public void WritePizzasToFile()
@@ -47,6 +45,10 @@ namespace WardsPizzeria
             //XmlReader fromFile= XmlReader.Create(@"P:\Pizzeria\Pizzalijst.xml");
             List<Pizza> pizzalist = (List<Pizza>)toList.Deserialize(reader);
             reader.Close();
+            foreach (Pizza pizza in pizzaList)
+            {
+                Console.WriteLine(pizza.Name);
+            }
         }
     }
 
