@@ -1,30 +1,24 @@
 ﻿using System;
 using System.Xml.Serialization;
 using System.IO;
-
 namespace WardsPizzeria
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Employee bs = new Employee();
+            Pizza pizza = new Pizza(1,"Margherita", "Kaas, tomatensaus, kruiden", true,5.0);
 
-            XmlSerializer xs = new XmlSerializer(typeof(Employee));
+            XmlSerializer xs = new XmlSerializer(typeof(Pizza));
 
-            TextWriter txtWriter = new StreamWriter(@ "D:\Serialization.xml");
+            TextWriter txtWriter = new StreamWriter(@"P:\Pizzeria\Serialization.xml");
 
-            xs.Serialize(txtWriter, bs);
+            xs.Serialize(txtWriter, pizza);
 
             txtWriter.Close();
 
         }
     }
-    public class Employee
-    {
-        public int Id = 1;
-        public String name = "John Smith";
-        public string subject = "Physics";
-    }
+   
 
 }
