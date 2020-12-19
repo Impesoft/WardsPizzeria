@@ -1,35 +1,53 @@
 ﻿using System;
-using System.Xml.Serialization;
-using System.Xml;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace WardsPizzeria
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
 
-            List<Pizza> pizzaList = new List<Pizza>();
+    public class Program
+    {
+        public static List<Pizza> pizzaList = new List<Pizza>();
+
+        private static void Main(string[] args)
+        {
             pizzaList.Add(new Pizza(1, "Margherita", "Kaas, tomatensaus, kruiden", true, 5.0));
             pizzaList.Add(new Pizza(1, "Funghi", "Kaas, tomatensaus, champignons, kruiden", true, 6.0));
             pizzaList.Add(new Pizza(1, "Prosciutto", "Kaas, tomatensaus, hesp, kruiden", true, 5.0));
-            XmlSerializer toXML = new XmlSerializer(pizzaList.GetType());
-
-          TextWriter fileWriter = new StreamWriter(@"P:\Pizzeria\Serialization.xml");
-            TextWriter txtWriter = new StringWriter();
-        //    XmlDocument xmlPizzalist = new XmlDocument();
-            toXML.Serialize(txtWriter, pizzaList);
-            Console.WriteLine(txtWriter.ToString());
-
-            toXML.Serialize(fileWriter, pizzaList);
-            txtWriter.Close();
-            Console.WriteLine();
-
+            Program p = new Program();
+            // p.WritePizzasToFile();
+            p.ReadPizzasFromFile();
+            foreach (Pizza pizza in pizzaList)
+            {
+                Console.WriteLine(pizza.Name);
+            }
         }
 
+        public void WritePizzasToFile()
+        {
+            XmlSerializer toXML = new XmlSerializer(pizzaList.GetType());
+
+            TextWriter toFile = new StreamWriter(@"P:\Pizzeria\Pizzalijst.xml");
+            toXML.Serialize(toFile, pizzaList);
+            toFile.Close();
+        }
+        public void WritePizzasToString()
+        {
+            XmlSerializer toXML = new XmlSerializer(pizzaList.GetType());
+            TextWriter toString = new StringWriter();
+            toXML.Serialize(toString, pizzaList);
+            toString.Close();
+        }
+        public void ReadPizzasFromFile()
+        {
+            XmlSerializer toList = new XmlSerializer(pizzaList.GetType());
+            StreamReader reader = new StreamReader(@"P:\Pizzeria\Pizzalijst.xml");
+            //XmlReader fromFile= XmlReader.Create(@"P:\Pizzeria\Pizzalijst.xml");
+            List<Pizza> pizzalist = (List<Pizza>)toList.Deserialize(reader);
+            reader.Close();
+        }
     }
-   
 
 }

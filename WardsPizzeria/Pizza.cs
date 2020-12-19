@@ -6,17 +6,19 @@ using System.Text;
 
 namespace WardsPizzeria
 {
-    [XmlRoot("ListOFPizzas")]
 
     public enum PizzaSize { small, medium, large };
 
     public enum PizzaCrust { pan, deep, cheese };
 
+    [Serializable()]
     public class Pizza
     {
-        [XmlArray("Pizza")]
+        [XmlElement("Pizza")]
 
         public static int PizzaID;
+        [XmlElement("ListOFPizzas")]
+
         public string Name { get; set; }
         public string PizzaIngredients { get; set; }
         public double OrderPrice { get; set; }
@@ -30,9 +32,11 @@ namespace WardsPizzeria
             OrderPrice = orderPrice;
 
         }
+        
         public Pizza()
         {
             PizzaID++;
+
             Name = "Margherita   ";
             PizzaIngredients = "ingredient1, ingredient2, ...";
             IsVeggie = false;
