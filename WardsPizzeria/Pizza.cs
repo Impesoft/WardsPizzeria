@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using System.Text;
+using System.Xml;
 
 namespace WardsPizzeria
 {
@@ -14,6 +15,12 @@ namespace WardsPizzeria
     [Serializable()]
     public class Pizza
     {
+        [XmlRoot("ArrayOfPizza", Namespace = "http://www.w3.org/2001/XMLSchema")]
+        public class MyRoot
+        {
+           // public KMCModelExtCovPriceInquiry Inquiry { get; set; }
+        }
+        public List<Pizza>PizzaList { get; set; }
         [XmlElement("Pizza")]
 
         public static int PizzaID;
@@ -43,7 +50,40 @@ namespace WardsPizzeria
             OrderPrice = 4.5;
 
         }
- 
- 
+        public void WritePizzasToString()
+        {
+            XmlSerializer toXML = new XmlSerializer(PizzaList.GetType());
+            TextWriter toString = new StringWriter();
+            toXML.Serialize(toString, PizzaList);
+            toString.Close();
+        }
+        public void ReadPizzasFromFile()
+        {
+           // XmlReader fromFile= XmlReader.Create(@"P:\Pizzeria\Pizzalijst.xml");
+           // fromFile.MoveToContent();
+           // fromFile.ReadToDescendant("Pizza");
+            XmlSerializer toList = new XmlSerializer(typeof(List<Pizza>));
+
+            StreamReader reader = new StreamReader(@"P:\Pizzeria\Pizzalijst.xml");
+            PizzaList = (List<Pizza>)toList.Deserialize(reader);
+
+            reader.Close();
+            foreach (Pizza pizza in PizzaList)
+            {
+                Console.WriteLine(pizza.Name);
+                Console.WriteLine(pizza.PizzaIngredients);
+                Console.WriteLine(pizza.OrderPrice);
+                Console.WriteLine(pizza.IsVeggie);
+            }
+        }
+        public void WritePizzasToFile()
+        {
+            XmlSerializer toXML = new XmlSerializer(PizzaList.GetType());
+
+            TextWriter toFile = new StreamWriter(@"P:\Pizzeria\Pizzalijst.xml");
+            toXML.Serialize(toFile, PizzaList);
+            toFile.Close();
+        }
+
     }
 }
