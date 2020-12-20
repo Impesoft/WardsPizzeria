@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Text;
 
 namespace WardsPizzeria
 {
-
     public class Program
     {
-        public static string path = @"P:\Pizzeria\Pizzalijst.xml";
-
+        public static string Path = @"P:\Pizzeria\Pizzalijst.xml";
+        public static string LogPath = @"P:\Pizzeria\Sales.log";
+        // public static Pizza pizza;
         private static void Main(string[] args)
         {
             //Console.SetWindowSize(120, 20);
@@ -21,9 +17,9 @@ namespace WardsPizzeria
 
             Pizza pizza = new Pizza();
             // pizza.WritePizzasToFile(path);
-            if (File.Exists(path))
+            if (File.Exists(Path))
             {
-                pizza.ReadPizzasFromFile(path);
+                pizza.ReadPizzasFromFile(Path);
                 foreach (Pizza loadedpizza in pizza.PizzaList)
                 {
                     Console.Write($"Pizza {loadedpizza.Name}");
@@ -32,7 +28,8 @@ namespace WardsPizzeria
                     Console.Write($"{(double)loadedpizza.OrderPrice} veggie:");
                     Console.WriteLine(loadedpizza.IsVeggie);
                 }
-            } else
+            }
+            else
             {
                 Console.WriteLine("Currently we don't have any pizza's available for sale...\nDo you want to add some pizza's to the pizzalist?(Y/N)");
                 char yesNo = char.ToUpper(Convert.ToChar(Console.ReadKey()));
@@ -41,15 +38,15 @@ namespace WardsPizzeria
                     case 'Y':
                         // pizzamaker
                         break;
+
                     case 'N':
                         // main menu
                         break;
                 }
             }
+            Console.WriteLine("press any key to continue...");
+            Console.ReadKey();
+            Menu menu = new Menu(pizza);
         }
-
- 
- 
     }
-
 }
