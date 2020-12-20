@@ -40,7 +40,7 @@ namespace WardsPizzeria
 
         }
         
-        public Pizza()
+        public Pizza() //needed for xml constructor
         {
             PizzaID++;
 
@@ -50,37 +50,23 @@ namespace WardsPizzeria
             OrderPrice = 4.5;
 
         }
-        public void WritePizzasToString()
+     
+        public void ReadPizzasFromFile(string path)
         {
-            XmlSerializer toXML = new XmlSerializer(PizzaList.GetType());
-            TextWriter toString = new StringWriter();
-            toXML.Serialize(toString, PizzaList);
-            toString.Close();
-        }
-        public void ReadPizzasFromFile()
-        {
-           // XmlReader fromFile= XmlReader.Create(@"P:\Pizzeria\Pizzalijst.xml");
-           // fromFile.MoveToContent();
-           // fromFile.ReadToDescendant("Pizza");
+
             XmlSerializer toList = new XmlSerializer(typeof(List<Pizza>));
 
-            StreamReader reader = new StreamReader(@"P:\Pizzeria\Pizzalijst.xml");
+            StreamReader reader = new StreamReader(path);
             PizzaList = (List<Pizza>)toList.Deserialize(reader);
 
             reader.Close();
-            foreach (Pizza pizza in PizzaList)
-            {
-                Console.WriteLine(pizza.Name);
-                Console.WriteLine(pizza.PizzaIngredients);
-                Console.WriteLine(pizza.OrderPrice);
-                Console.WriteLine(pizza.IsVeggie);
-            }
+    
         }
-        public void WritePizzasToFile()
+        public void WritePizzasToFile(string path)
         {
             XmlSerializer toXML = new XmlSerializer(PizzaList.GetType());
 
-            TextWriter toFile = new StreamWriter(@"P:\Pizzeria\Pizzalijst.xml");
+            TextWriter toFile = new StreamWriter(path);
             toXML.Serialize(toFile, PizzaList);
             toFile.Close();
         }
