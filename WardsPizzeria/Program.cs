@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace WardsPizzeria
@@ -7,6 +8,9 @@ namespace WardsPizzeria
     {
         public static string Path = @"P:\Pizzeria\Pizzalijst.xml";
         public static string LogPath = @"P:\Pizzeria\Sales.log";
+        public static int PizzaID=0;
+        public static List<Pizza> PizzaList { get; set; }
+
         // public static Pizza pizza;
         private static void Main(string[] args)
         {
@@ -16,12 +20,13 @@ namespace WardsPizzeria
             //pizzaList.Add(new Pizza(1, "Margherita", "Kaas, tomatensaus, kruiden", true, 5.0));
 
             Pizza pizza = new Pizza();
-            // pizza.WritePizzasToFile(path);
             if (File.Exists(Path))
             {
                 pizza.ReadPizzasFromFile(Path);
-                foreach (Pizza loadedpizza in pizza.PizzaList)
+                PizzaID = PizzaList.Count;
+                foreach (Pizza loadedpizza in Program.PizzaList)
                 {
+                    Console.Write(loadedpizza.Id+"- ");
                     Console.Write($"Pizza {loadedpizza.Name}");
                     Console.CursorLeft = 25;
                     Console.Write($"ingredients({loadedpizza.PizzaIngredients}) price € ");
@@ -32,7 +37,8 @@ namespace WardsPizzeria
             else
             {
                 Console.WriteLine("Currently we don't have any pizza's available for sale...\nDo you want to add some pizza's to the pizzalist?(Y/N)");
-                char yesNo = char.ToUpper(Convert.ToChar(Console.ReadKey()));
+                
+                char yesNo = char.ToUpper(Console.ReadKey().KeyChar);
                 switch (yesNo)
                 {
                     case 'Y':

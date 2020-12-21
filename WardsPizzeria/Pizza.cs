@@ -15,24 +15,18 @@ namespace WardsPizzeria
     [Serializable()]
     public class Pizza
     {
-        [XmlRoot("ArrayOfPizza", Namespace = "http://www.w3.org/2001/XMLSchema")]
-        public class MyRoot
-        {
-           // public KMCModelExtCovPriceInquiry Inquiry { get; set; }
-        }
-        public List<Pizza>PizzaList { get; set; }
-        [XmlElement("Pizza")]
 
-        public static int PizzaID;
-        [XmlElement("ListOFPizzas")]
+        [XmlElement("Id")]
 
+        public int Id { get; set; }
+        [XmlElement("Name")]
         public string Name { get; set; }
         public string PizzaIngredients { get; set; }
         public double OrderPrice { get; set; }
         public bool IsVeggie { get; set; }
         public Pizza(int id, string name, string ingredients, bool isVeggie, double orderPrice)
         {
-            PizzaID++;
+            Id = Program.PizzaID;
             Name = name;
             PizzaIngredients = ingredients;
             IsVeggie = isVeggie;
@@ -42,8 +36,8 @@ namespace WardsPizzeria
         
         public Pizza() //needed for xml constructor
         {
-            PizzaID++;
-
+            Id = Program.PizzaID;
+            Program.PizzaID++;
             Name = "Margherita   ";
             PizzaIngredients = "ingredient1, ingredient2, ...";
             IsVeggie = false;
@@ -57,17 +51,17 @@ namespace WardsPizzeria
             XmlSerializer toList = new XmlSerializer(typeof(List<Pizza>));
 
             StreamReader reader = new StreamReader(path);
-            PizzaList = (List<Pizza>)toList.Deserialize(reader);
+            Program.PizzaList = (List<Pizza>)toList.Deserialize(reader);
 
             reader.Close();
     
         }
         public void WritePizzasToFile(string path)
         {
-            XmlSerializer toXML = new XmlSerializer(PizzaList.GetType());
+            XmlSerializer toXML = new XmlSerializer(Program.PizzaList.GetType());
 
             TextWriter toFile = new StreamWriter(path);
-            toXML.Serialize(toFile, PizzaList);
+            toXML.Serialize(toFile, Program.PizzaList);
             toFile.Close();
         }
 
