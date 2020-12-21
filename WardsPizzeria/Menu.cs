@@ -39,29 +39,26 @@ namespace WardsPizzeria
             Console.Clear();
             Console.WriteLine("Pizza Creator:");
             Console.WriteLine("--------------");
-            //Console.Write("Give pizza ID name: ");
-            //I think this shouldn't be definable by user, but be an autoincrement value this way no duplicates can be created
-            // pizza.id = Program.PizzaID;
+
             Console.Write("Give pizza name: ");
             pizza.Name = Console.ReadLine();
             Console.Write("Give base pizza price: ");
             pizza.OrderPrice = Convert.ToDouble(Console.ReadLine());
             Console.Write("Give the ingredients (separted with commas):");
             string stringIngedients = Console.ReadLine();
+            pizza.PizzaIngredients = stringIngedients;
             Console.Write("Veggie (Y/N):");
             char yesNo = (Char.ToUpper(Console.ReadKey().KeyChar));
-
-           // char yesNo = (Convert.ToChar(Console.ReadKey()));
-            //char.ToUpper(yesNo);
             pizza.IsVeggie = (yesNo == 'Y');
+
             // add new pizza to list
             Program.PizzaID++;
             pizza.Id = Program.PizzaID;
             Program.PizzaList.Add(pizza);
             pizza.WritePizzasToFile(Program.Path);
             Console.WriteLine("\nWritten to Pizzalist file, would you like to add another one?(Y/N)");
-            Console.ReadKey();
-
+            bool yes = (Char.ToUpper(Console.ReadKey().KeyChar))=='Y';
+            if (yes) PizzaCreator(pizza);
         }
         public void SalesLog()
         {
@@ -76,16 +73,19 @@ namespace WardsPizzeria
             Console.WriteLine("Welcome to our pizzeria:");
             Console.WriteLine("------------------------");
             Console.WriteLine("Our list of pizzas");
-                foreach (Pizza loadedpizza in Program.PizzaList)
-                {
-                    Console.Write($"Pizza {loadedpizza.Name}");
-                    Console.CursorLeft = 25;
-                    Console.Write($"ingredients({loadedpizza.PizzaIngredients}) price € ");
-                    Console.Write($"{(double)loadedpizza.OrderPrice} veggie:");
-                    Console.WriteLine(loadedpizza.IsVeggie);
-                }
+            foreach (Pizza loadedpizza in Program.PizzaList)
+            {
+                Console.Write(loadedpizza.Id + "- ");
+                Console.Write($"Pizza {loadedpizza.Name}");
+                Console.CursorLeft = 25;
+                Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
+                Console.CursorLeft = 100;
+                Console.Write($"price € {(double)loadedpizza.OrderPrice}");
+                Console.WriteLine(" veggie:" + loadedpizza.IsVeggie);
+            }
             Console.ReadKey();
 
         }
+       
     }
 }
