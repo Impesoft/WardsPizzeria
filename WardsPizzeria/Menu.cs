@@ -84,8 +84,6 @@ namespace WardsPizzeria
             Console.WriteLine("Welcome to our pizzeria:");
             Console.WriteLine("------------------------");
 
-            Program.PizzaList = Program.PizzaList.OrderBy(p => p.Id).ToList(); 
-            //normaal niet nodig tenzij ik manueel id's verander in de xml om pizza's anders te sorteren ;-)
 
                    if (!(Program.PizzaList == null))
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace WardsPizzeria
 {
@@ -23,6 +24,8 @@ namespace WardsPizzeria
             if (File.Exists(Path))
             {
                 pizza.ReadPizzasFromFile(Path);
+                PizzaList = PizzaList.OrderBy(p => p.Id).ToList();
+
                 PizzaID = PizzaList.Count;
  
             }
