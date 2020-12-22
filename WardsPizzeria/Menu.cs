@@ -104,7 +104,7 @@ namespace WardsPizzeria
                 try
                 {
                     Pizza chosenPizza = Program.PizzaList.Single(Pizza => Pizza.Id == chosenPizzaId);
-                    Console.WriteLine(chosenPizza.Name);
+                    pizza = chosenPizza;
                 }
                 catch (InvalidOperationException)
                 {
@@ -118,6 +118,8 @@ namespace WardsPizzeria
                return;
 
             }
+            Console.WriteLine(pizza.Name+" excellent choice, in what size would you like this pizza?");
+
             Console.ReadKey();
         }
     }
