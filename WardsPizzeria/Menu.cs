@@ -6,6 +6,10 @@ namespace WardsPizzeria
 {
     internal class Menu
     {
+        public Menu()
+        {
+            //
+        }
         public Menu(Pizza pizza)
         {
             char chosenKey;
@@ -110,6 +114,9 @@ namespace WardsPizzeria
             else
             {
                 Console.WriteLine("Pizza List is currently Empty");
+                Console.ReadKey();
+               return;
+
             }
             Console.ReadKey();
         }

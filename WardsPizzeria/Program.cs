@@ -9,7 +9,7 @@ namespace WardsPizzeria
         public static string Path = @"P:\Pizzeria\Pizzalijst.xml";
         public static string LogPath = @"P:\Pizzeria\Sales.log";
         public static int PizzaID = 0;
-        public static List<Pizza> PizzaList { get; set; }
+        public static List<Pizza> PizzaList { get; set; } = new List<Pizza> { } ;
 
         // public static Pizza pizza;
         private static void Main(string[] args)
@@ -34,7 +34,11 @@ namespace WardsPizzeria
                 switch (yesNo)
                 {
                     case 'Y':
+
                         // pizzamaker
+                        Menu Creator = new Menu();
+                            Creator.PizzaCreator(pizza);
+
                         break;
 
                     case 'N':
