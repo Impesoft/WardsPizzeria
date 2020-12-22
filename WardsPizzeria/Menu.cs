@@ -94,13 +94,34 @@ namespace WardsPizzeria
                     Console.CursorLeft = 100;
                     string priceString = ((double)loadedpizza.OrderPrice).ToString("00.00", nlBE);
                     Console.Write($"price € {priceString}");
-                    if (loadedpizza.IsVeggie)
-                    {
-                        Console.WriteLine(" (vegeterian)");
-                    }
-                    else { Console.WriteLine(); }
+                    Console.WriteLine((loadedpizza.IsVeggie ? "(vegetarian)" : ""));
+                    //if (loadedpizza.IsVeggie)
+                    //{
+                    //    Console.WriteLine(" (vegeterian)");
+                    //}
+                    //else { Console.WriteLine(); }
                 }
-                int chosenPizzaId = Convert.ToInt32(Console.ReadLine());
+                bool pizzaNotChosen = false;
+                int chosenPizzaId=0;
+                do
+                {
+                    try
+                    {
+                        chosenPizzaId = Convert.ToInt32(Console.ReadLine());
+                        pizzaNotChosen = false;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.CursorTop = Console.CursorTop - 1;
+                        int currentLineCursor = Console.CursorTop;
+                        Console.SetCursorPosition(0, Console.CursorTop);
+                        Console.Write(new string(' ', Console.WindowWidth));
+                        Console.SetCursorPosition(0, currentLineCursor);
+                        pizzaNotChosen = true;
+                    }
+
+                } while (pizzaNotChosen && (chosenPizzaId==0));
+
                 try
                 {
                     Pizza chosenPizza = Program.PizzaList.Single(Pizza => Pizza.Id == chosenPizzaId);
@@ -119,7 +140,7 @@ namespace WardsPizzeria
 
             }
             Console.WriteLine(pizza.Name+" excellent choice, in what size would you like this pizza?");
-
+            Console.WriteLine($"{(PizzaSize)PizzaSize.large}, {(PizzaSize)PizzaSize.medium} or {(PizzaSize)PizzaSize.small}.(L,M,S)");
             Console.ReadKey();
         }
     }
