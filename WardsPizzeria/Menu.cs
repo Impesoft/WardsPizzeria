@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Linq;
 
 namespace WardsPizzeria
 {
-    class Menu
+    internal class Menu
     {
         public Menu(Pizza pizza)
         {
@@ -27,15 +25,18 @@ namespace WardsPizzeria
                     case 'N':
                         PizzaCreator(pizza);
                         break;
+
                     case 'O':
                         OrderPizzas(pizza);
                         break;
+
                     case 'L':
                         SalesLog();
                         break;
                 }
             } while (chosenKey != 'Q');
         }
+
         public void PizzaCreator(Pizza pizza)
         {
             Console.Clear();
@@ -59,50 +60,58 @@ namespace WardsPizzeria
             Program.PizzaList.Add(pizza);
             pizza.WritePizzasToFile(Program.Path);
             Console.WriteLine("\nWritten to Pizzalist file, would you like to add another one?(Y/N)");
-            bool yes = (Char.ToUpper(Console.ReadKey().KeyChar))=='Y';
+            bool yes = (Char.ToUpper(Console.ReadKey().KeyChar)) == 'Y';
             if (yes) PizzaCreator(pizza);
         }
+
         public void SalesLog()
         {
-            Console.Clear(); 
+            Console.Clear();
             Console.WriteLine("Sales log");
             Console.ReadKey();
-
         }
+
         public void OrderPizzas(Pizza pizza)
         {
             CultureInfo nlBE = CultureInfo.CreateSpecificCulture("nl-BE");
             Console.Clear();
             Console.WriteLine("Welcome to our pizzeria:");
             Console.WriteLine("------------------------");
-            Console.WriteLine("Our list of pizzas");
-            foreach (Pizza loadedpizza in Program.PizzaList)
+            if (!(Program.PizzaList == null))
             {
-               string idString = loadedpizza.Id.ToString("00", nlBE); // use 0.00 for price
-                Console.Write(idString + "- ");
-                Console.Write($"Pizza {loadedpizza.Name}");
-                Console.CursorLeft = 25;
-                Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
-                Console.CursorLeft = 100;
-                string priceString = ((double)loadedpizza.OrderPrice).ToString("00.00", nlBE);
-                Console.Write($"price € {priceString}");
-                if (loadedpizza.IsVeggie)
+                Console.WriteLine("Our list of pizzas");
+                foreach (Pizza loadedpizza in Program.PizzaList)
                 {
-                    Console.WriteLine(" (vegeterian)");
+                    string idString = loadedpizza.Id.ToString("00", nlBE); // use 0.00 for price
+                    Console.Write(idString + "- ");
+                    Console.Write($"Pizza {loadedpizza.Name}");
+                    Console.CursorLeft = 25;
+                    Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
+                    Console.CursorLeft = 100;
+                    string priceString = ((double)loadedpizza.OrderPrice).ToString("00.00", nlBE);
+                    Console.Write($"price € {priceString}");
+                    if (loadedpizza.IsVeggie)
+                    {
+                        Console.WriteLine(" (vegeterian)");
+                    }
+                    else { Console.WriteLine(); }
                 }
-                else { Console.WriteLine(); }
+                int chosenPizzaId = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    Pizza chosenPizza = Program.PizzaList.Single(Pizza => Pizza.Id == chosenPizzaId);
+                    Console.WriteLine(chosenPizza.Name);
+                }
+                catch (InvalidOperationException)
+                {
+                    Console.WriteLine("No such pizza.");
+                }
             }
-            int chosenPizzaId = Convert.ToInt32(Console.ReadLine());
-            try {
-                Pizza chosenPizza = Program.PizzaList.Single(Pizza => Pizza.Id == chosenPizzaId);
-                Console.WriteLine(chosenPizza.Name);
-            } catch (InvalidOperationException)
+            else
             {
-                Console.WriteLine("No such pizza.");
+                Console.WriteLine("Pizza List is currently Empty");
             }
             Console.ReadKey();
-
         }
-
     }
 }
