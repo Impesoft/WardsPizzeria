@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Linq;
 
 namespace WardsPizzeria
 {
@@ -91,9 +92,17 @@ namespace WardsPizzeria
                 }
                 else { Console.WriteLine(); }
             }
+            int chosenPizzaId = Convert.ToInt32(Console.ReadLine());
+            try {
+                Pizza chosenPizza = Program.PizzaList.Single(Pizza => Pizza.Id == chosenPizzaId);
+                Console.WriteLine(chosenPizza.Name);
+            } catch (InvalidOperationException)
+            {
+                Console.WriteLine("No such pizza.");
+            }
             Console.ReadKey();
 
         }
-       
+
     }
 }
