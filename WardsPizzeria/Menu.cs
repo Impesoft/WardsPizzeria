@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace WardsPizzeria
@@ -69,19 +70,26 @@ namespace WardsPizzeria
         }
         public void OrderPizzas(Pizza pizza)
         {
+            CultureInfo nlBE = CultureInfo.CreateSpecificCulture("nl-BE");
             Console.Clear();
             Console.WriteLine("Welcome to our pizzeria:");
             Console.WriteLine("------------------------");
             Console.WriteLine("Our list of pizzas");
             foreach (Pizza loadedpizza in Program.PizzaList)
             {
-                Console.Write(loadedpizza.Id + "- ");
+               string idString = loadedpizza.Id.ToString("00", nlBE); // use 0.00 for price
+                Console.Write(idString + "- ");
                 Console.Write($"Pizza {loadedpizza.Name}");
                 Console.CursorLeft = 25;
                 Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
                 Console.CursorLeft = 100;
-                Console.Write($"price € {(double)loadedpizza.OrderPrice}");
-                Console.WriteLine(" veggie:" + loadedpizza.IsVeggie);
+                string priceString = ((double)loadedpizza.OrderPrice).ToString("00.00", nlBE);
+                Console.Write($"price € {priceString}");
+                if (loadedpizza.IsVeggie)
+                {
+                    Console.WriteLine(" (vegeterian)");
+                }
+                else { Console.WriteLine(); }
             }
             Console.ReadKey();
 
