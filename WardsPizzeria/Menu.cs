@@ -143,7 +143,21 @@ namespace WardsPizzeria
             }
             Console.WriteLine(pizza.Name + " excellent choice, in what size would you like this pizza?");
             Console.WriteLine($"{(PizzaSize)PizzaSize.large}, {(PizzaSize)PizzaSize.medium} or {(PizzaSize)PizzaSize.small}.(L,M,S)");
-            Console.ReadKey();
+            char pizzaSize;
+            bool validSelection = false;
+            do {
+                pizzaSize = Char.ToUpper(Console.ReadKey().KeyChar);
+                switch (pizzaSize)
+                {
+                    case 's':
+                        break;
+                        
+                    case 'm':
+                        break;
+                    case 'l':
+                        break;
+            }
+            } while (!validSelection);
         }
     }
 }

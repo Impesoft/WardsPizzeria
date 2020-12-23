@@ -11,6 +11,7 @@ namespace WardsPizzeria
         public static string LogPath = @"P:\Pizzeria\Sales.log";
         public static int PizzaID = 0;
         public static List<Pizza> PizzaList { get; set; } = new List<Pizza> { };
+        public static List<Order> OrderList { get; set; } = new List<Order> { };
 
         // public static Pizza pizza;
         private static void Main(string[] args)
@@ -19,7 +20,7 @@ namespace WardsPizzeria
             Console.Title = "Pizza App(Admin)";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             //pizzaList.Add(new Pizza(1, "Margherita", "Kaas, tomatensaus, kruiden", true, 5.0));
-
+            Order order = new Order();
             Pizza pizza = new Pizza();
             if (File.Exists(Path))
             {
