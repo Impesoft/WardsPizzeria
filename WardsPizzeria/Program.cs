@@ -8,7 +8,7 @@ namespace WardsPizzeria
     public class Program
     {
         public static string Path = @"P:\Pizzeria\Pizzalijst.xml";
-        public static string LogPath = @"P:\Pizzeria\Sales.log";
+        public static string LogPath = @"P:\Pizzeria\Saleslog.xml";
         public static int PizzaID = 0;
         public static List<Pizza> PizzaList { get; set; } = new List<Pizza> { };
         public static List<Order> OrderList { get; set; } = new List<Order> { };

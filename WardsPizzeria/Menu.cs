@@ -79,13 +79,14 @@ namespace WardsPizzeria
 
         public void OrderPizzas(Pizza pizza)
         {
+            PizzaSize size = PizzaSize.unset;
+
             CultureInfo nlBE = CultureInfo.CreateSpecificCulture("nl-BE");
             Console.Clear();
             Console.WriteLine("Welcome to our pizzeria:");
             Console.WriteLine("------------------------");
 
-
-                   if (!(Program.PizzaList == null))
+            if (!(Program.PizzaList == null))
             {
                 Console.WriteLine("Our list of pizzas");
                 foreach (Pizza loadedpizza in Program.PizzaList)
@@ -107,6 +108,7 @@ namespace WardsPizzeria
                 }
                 bool pizzaNotChosen = false;
                 int chosenPizzaId = 0;
+
                 do
                 {
                     try
@@ -133,6 +135,7 @@ namespace WardsPizzeria
                 catch (InvalidOperationException)
                 {
                     Console.WriteLine("No such pizza.");
+                    return;
                 }
             }
             else
@@ -145,19 +148,33 @@ namespace WardsPizzeria
             Console.WriteLine($"{(PizzaSize)PizzaSize.large}, {(PizzaSize)PizzaSize.medium} or {(PizzaSize)PizzaSize.small}.(L,M,S)");
             char pizzaSize;
             bool validSelection = false;
-            do {
+            do
+            {
                 pizzaSize = Char.ToUpper(Console.ReadKey().KeyChar);
                 switch (pizzaSize)
                 {
-                    case 's':
+                    case 'S':
+                        validSelection = true;
+                        size = PizzaSize.small;
                         break;
-                        
-                    case 'm':
+
+                    case 'M':
+                        validSelection = true;
+                        size = PizzaSize.medium;
                         break;
-                    case 'l':
+
+                    case 'L':
+                        validSelection = true;
+                        size = PizzaSize.large;
                         break;
-            }
+                }
             } while (!validSelection);
+            Order o = new Order(pizza, size);
+            Program.OrderList.Add(o);
+            o.WriteOrdersToFile(Program.LogPath);
+            Console.WriteLine("testlog");
+            Console.ReadLine();
+            Environment.Exit(0);
         }
     }
 }

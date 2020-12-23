@@ -8,9 +8,9 @@ using System.Xml;
 namespace WardsPizzeria
 {
 
-    public enum PizzaSize { small, medium, large };
+    public enum PizzaSize { unset, small, medium, large };
 
-    public enum PizzaCrust { pan, deep, cheese };
+    public enum PizzaCrust { unset, pan, deep, cheese };
 
     [Serializable()]
     public class Pizza

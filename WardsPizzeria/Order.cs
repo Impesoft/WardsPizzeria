@@ -22,13 +22,21 @@ namespace WardsPizzeria
             PizzaCrust crust;
             double price;
         }
+        public Order(Pizza pizza, PizzaSize size /*, PizzaCrust crust, double price*/)
+        {
+            OrderedPizza = pizza;
+            Size = size;
+           // Crust = crust;
+           // Price = price;
+        }
+
         public void ReadOrdersFromFile(string path)
         {
 
             XmlSerializer toList = new XmlSerializer(typeof(List<Order>));
 
             StreamReader reader = new StreamReader(path);
-            Program.PizzaList = (List<Pizza>)toList.Deserialize(reader);
+            Program.OrderList = (List<Order>)toList.Deserialize(reader);
 
             reader.Close();
 
