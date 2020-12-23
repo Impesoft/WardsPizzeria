@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -6,6 +7,11 @@ namespace WardsPizzeria
 {
     internal class Menu
     {
+        public Menu()
+        {
+            //
+        }
+
         public Menu(Pizza pizza)
         {
             char chosenKey;
@@ -77,7 +83,9 @@ namespace WardsPizzeria
             Console.Clear();
             Console.WriteLine("Welcome to our pizzeria:");
             Console.WriteLine("------------------------");
-            if (!(Program.PizzaList == null))
+
+
+                   if (!(Program.PizzaList == null))
             {
                 Console.WriteLine("Our list of pizzas");
                 foreach (Pizza loadedpizza in Program.PizzaList)
@@ -88,19 +96,39 @@ namespace WardsPizzeria
                     Console.CursorLeft = 25;
                     Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
                     Console.CursorLeft = 100;
-                    string priceString = ((double)loadedpizza.OrderPrice).ToString("00.00", nlBE);
+                    string priceString = ((double)loadedpizza.OrderPrice).ToString("0.00", nlBE);
                     Console.Write($"price € {priceString}");
-                    if (loadedpizza.IsVeggie)
-                    {
-                        Console.WriteLine(" (vegeterian)");
-                    }
-                    else { Console.WriteLine(); }
+                    Console.WriteLine((loadedpizza.IsVeggie ? "(vegetarian)" : ""));
+                    //if (loadedpizza.IsVeggie)
+                    //{
+                    //    Console.WriteLine(" (vegeterian)");
+                    //}
+                    //else { Console.WriteLine(); }
                 }
-                int chosenPizzaId = Convert.ToInt32(Console.ReadLine());
+                bool pizzaNotChosen = false;
+                int chosenPizzaId = 0;
+                do
+                {
+                    try
+                    {
+                        chosenPizzaId = Convert.ToInt32(Console.ReadLine());
+                        pizzaNotChosen = false;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.CursorTop = Console.CursorTop - 1;
+                        int currentLineCursor = Console.CursorTop;
+                        Console.SetCursorPosition(0, Console.CursorTop);
+                        Console.Write(new string(' ', Console.WindowWidth));
+                        Console.SetCursorPosition(0, currentLineCursor);
+                        pizzaNotChosen = true;
+                    }
+                } while (pizzaNotChosen && (chosenPizzaId == 0));
+
                 try
                 {
                     Pizza chosenPizza = Program.PizzaList.Single(Pizza => Pizza.Id == chosenPizzaId);
-                    Console.WriteLine(chosenPizza.Name);
+                    pizza = chosenPizza;
                 }
                 catch (InvalidOperationException)
                 {
@@ -110,7 +138,11 @@ namespace WardsPizzeria
             else
             {
                 Console.WriteLine("Pizza List is currently Empty");
+                Console.ReadKey();
+                return;
             }
+            Console.WriteLine(pizza.Name + " excellent choice, in what size would you like this pizza?");
+            Console.WriteLine($"{(PizzaSize)PizzaSize.large}, {(PizzaSize)PizzaSize.medium} or {(PizzaSize)PizzaSize.small}.(L,M,S)");
             Console.ReadKey();
         }
     }
