@@ -22,15 +22,15 @@ namespace WardsPizzeria
         [XmlElement("Name")]
         public string Name { get; set; }
         public string PizzaIngredients { get; set; }
-        public double OrderPrice { get; set; }
+        public double BasePrice { get; set; }
         public bool IsVeggie { get; set; }
-        public Pizza(int id, string name, string ingredients, bool isVeggie, double orderPrice)
+        public Pizza(int id, string name, string ingredients, bool isVeggie, double basePrice)
         {
             Id = Program.PizzaID;
             Name = name;
             PizzaIngredients = ingredients;
             IsVeggie = isVeggie;
-            OrderPrice = orderPrice;
+            BasePrice = basePrice;
 
         }
         
@@ -41,7 +41,7 @@ namespace WardsPizzeria
             Name = "Margherita   ";
             PizzaIngredients = "ingredient1, ingredient2, ...";
             IsVeggie = false;
-            OrderPrice = 4.5;
+            BasePrice = 4.5;
 
         }
      

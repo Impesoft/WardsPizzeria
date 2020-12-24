@@ -57,7 +57,7 @@ namespace WardsPizzeria
             Console.Write("Give pizza name: ");
             pizza.Name = Console.ReadLine();
             Console.Write("Give base pizza price: ");
-            pizza.OrderPrice = Convert.ToDouble(Console.ReadLine());
+            pizza.BasePrice = Convert.ToDouble(Console.ReadLine());
             Console.Write("Give the ingredients (separted with commas):");
             string stringIngedients = Console.ReadLine();
             pizza.PizzaIngredients = stringIngedients;
@@ -116,7 +116,7 @@ namespace WardsPizzeria
                         Console.CursorLeft = 25;
                         Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
                         Console.CursorLeft = 100;
-                        string priceString = ((double)loadedpizza.OrderPrice).ToString("0.00", nlBE);
+                        string priceString = ((double)loadedpizza.BasePrice).ToString("0.00", nlBE);
                         Console.Write($"price € {priceString}");
                         Console.WriteLine((loadedpizza.IsVeggie ? "(vegetarian)" : ""));
                         //if (loadedpizza.IsVeggie)
@@ -174,6 +174,7 @@ namespace WardsPizzeria
                         case 'S':
                             validSelection = true;
                             size = PizzaSize.small;
+                            
                             break;
 
                         case 'M':
@@ -188,7 +189,8 @@ namespace WardsPizzeria
                     }
                 } while (!validSelection);
 
-                 o = new Order(pizza, size);
+                o = new Order(pizza, size);
+                o.Price = pizza.BasePrice + ((int)size - 1) * .5;
                 o.OrderDate = DateTime.Now.ToString("yyyy MMMM dd");
                 currentOrder.Add(o);
                 Console.CursorLeft = 0;
