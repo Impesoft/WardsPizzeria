@@ -21,13 +21,18 @@ namespace WardsPizzeria
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             //pizzaList.Add(new Pizza(1, "Margherita", "Kaas, tomatensaus, kruiden", true, 5.0));
             Order order = new Order();
+            if (File.Exists(LogPath))
+            {
+                order.ReadOrdersFromFile(LogPath);
+                OrderList = OrderList.OrderBy(p => p.OrderedPizza.Id).ToList();
+            }
             Pizza pizza = new Pizza();
             if (File.Exists(Path))
             {
                 pizza.ReadPizzasFromFile(Path);
                 PizzaList = PizzaList.OrderBy(p => p.Id).ToList();
 
-                PizzaID = PizzaList.Count;
+                PizzaID = PizzaList[PizzaList.Count-1].Id;
  
             }
             else
