@@ -79,6 +79,14 @@ namespace WardsPizzeria
         {
             Console.Clear();
             Console.WriteLine("Sales log");
+            foreach (Order o in Program.OrderList)
+            {
+                Console.Write(o.OrderDate + ": ");
+                Console.Write($"{o.OrderedPizza.Name} ({o.Size}) ");
+                Console.Write($"ingrediënten ({o.OrderedPizza.PizzaIngredients})");
+                Console.WriteLine((o.OrderedPizza.IsVeggie ? "(vegetarian)" : ""));
+
+            }
             Console.ReadKey();
         }
 
