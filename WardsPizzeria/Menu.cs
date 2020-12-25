@@ -82,11 +82,13 @@ namespace WardsPizzeria
             foreach (Order o in Program.OrderList)
             {
                 Console.Write(o.OrderDate + ": ");
+                Console.Write($"Price € {o.Price} ");
                 Console.Write($"{o.OrderedPizza.Name} ({o.Size}) ");
                 Console.Write($"ingrediënten ({o.OrderedPizza.PizzaIngredients})");
                 Console.WriteLine((o.OrderedPizza.IsVeggie ? "(vegetarian)" : ""));
-
             }
+            Console.WriteLine($"pizzas order for a total of € {(double)Program.OrderList.Sum(item => item.Price)}");
+
             Console.ReadKey();
         }
 
@@ -200,8 +202,9 @@ namespace WardsPizzeria
             
             Program.OrderList.AddRange(currentOrder);
              o.WriteOrdersToFile(Program.LogPath);
-            Console.ReadLine();
-            Environment.Exit(0);
+            //       Console.ReadLine();
+            // Environment.Exit(0);
+            return;
         }
     }
 }
