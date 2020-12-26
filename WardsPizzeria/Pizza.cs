@@ -52,9 +52,8 @@ namespace WardsPizzeria
             reader.Close();
         }
 
-        public void WritePizzasToFile(string path, Pizza receivedpizza)
+        public void WritePizzasToFile(string path)
         {
-            Pizza pizza = receivedpizza;
             XmlSerializer toXML = new XmlSerializer(Program.PizzaList.GetType());
 
             TextWriter toFile = new StreamWriter(path);

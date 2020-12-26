@@ -52,26 +52,27 @@ namespace WardsPizzeria
             bool yes;
             do
             {
+                Pizza localPizza = new Pizza();
+
                 Console.Clear();
                 Console.WriteLine("Pizza Creator:");
                 Console.WriteLine("--------------");
 
                 Console.Write("Give pizza name: ");
-                pizza.Name = Console.ReadLine();
+                localPizza.Name = Console.ReadLine();
                 Console.Write("Give base pizza price: ");
-                pizza.BasePrice = Convert.ToDouble(Console.ReadLine());
+                localPizza.BasePrice = Convert.ToDouble(Console.ReadLine());
                 Console.Write("Give the ingredients (separted with commas):");
                 string stringIngedients = Console.ReadLine();
-                pizza.PizzaIngredients = stringIngedients;
+                localPizza.PizzaIngredients = stringIngedients;
                 Console.Write("Veggie (Y/N):");
                 char yesNo = (Char.ToUpper(Console.ReadKey().KeyChar));
-                pizza.IsVeggie = (yesNo == 'Y');
+                localPizza.IsVeggie = (yesNo == 'Y');
 
                 // add new pizza to list
-                pizza.Id = Program.PizzaID;
-                Program.PizzaList.Add(pizza);
-                pizza.WritePizzasToFile(Program.Path, pizza);
-                Program.PizzaID++;
+                localPizza.Id = Program.PizzaID;
+                Program.PizzaList.Add(localPizza);
+                pizza.WritePizzasToFile(Program.Path);
                 Console.WriteLine("\nWritten to Pizzalist file, would you like to add another one?(Y/N)");
                 yes = (Char.ToUpper(Console.ReadKey().KeyChar)) == 'Y';
             } while (yes);
@@ -129,6 +130,7 @@ namespace WardsPizzeria
                         //}
                         //else { Console.WriteLine(); }
                     }
+                    Console.WriteLine($"\nWhat would be the pizza of you choice? enter the (number 1 to {Program.PizzaList.Count-1})");
                     bool pizzaNotChosen = false;
                     int chosenPizzaId = 0;
                     do
