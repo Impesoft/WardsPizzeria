@@ -32,8 +32,7 @@ namespace WardsPizzeria
                 pizza.ReadPizzasFromFile(Path);
                 PizzaList = PizzaList.OrderBy(p => p.Id).ToList();
 
-                PizzaID = PizzaList[PizzaList.Count-1].Id;
- 
+                PizzaID = PizzaList[PizzaList.Count - 1].Id;
             }
             else
             {
@@ -46,7 +45,7 @@ namespace WardsPizzeria
 
                         // pizzamaker
                         Menu Creator = new Menu();
-                            Creator.PizzaCreator(pizza);
+                        Creator.PizzaCreator(pizza);
 
                         break;
 

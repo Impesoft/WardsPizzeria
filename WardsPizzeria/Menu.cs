@@ -7,12 +7,11 @@ namespace WardsPizzeria
 {
     internal class Menu
     {
-        private  List<Order> currentOrder;
-        
+        private List<Order> currentOrder;
+
         public Menu()
         {
             //
-
         }
 
         public Menu(Pizza pizza)
@@ -50,29 +49,33 @@ namespace WardsPizzeria
 
         public void PizzaCreator(Pizza pizza)
         {
-            Console.Clear();
-            Console.WriteLine("Pizza Creator:");
-            Console.WriteLine("--------------");
+            bool yes;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Pizza Creator:");
+                Console.WriteLine("--------------");
 
-            Console.Write("Give pizza name: ");
-            pizza.Name = Console.ReadLine();
-            Console.Write("Give base pizza price: ");
-            pizza.BasePrice = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Give the ingredients (separted with commas):");
-            string stringIngedients = Console.ReadLine();
-            pizza.PizzaIngredients = stringIngedients;
-            Console.Write("Veggie (Y/N):");
-            char yesNo = (Char.ToUpper(Console.ReadKey().KeyChar));
-            pizza.IsVeggie = (yesNo == 'Y');
+                Console.Write("Give pizza name: ");
+                pizza.Name = Console.ReadLine();
+                Console.Write("Give base pizza price: ");
+                pizza.BasePrice = Convert.ToDouble(Console.ReadLine());
+                Console.Write("Give the ingredients (separted with commas):");
+                string stringIngedients = Console.ReadLine();
+                pizza.PizzaIngredients = stringIngedients;
+                Console.Write("Veggie (Y/N):");
+                char yesNo = (Char.ToUpper(Console.ReadKey().KeyChar));
+                pizza.IsVeggie = (yesNo == 'Y');
 
-            // add new pizza to list
-            Program.PizzaID++;
-            pizza.Id = Program.PizzaID;
-            Program.PizzaList.Add(pizza);
-            pizza.WritePizzasToFile(Program.Path);
-            Console.WriteLine("\nWritten to Pizzalist file, would you like to add another one?(Y/N)");
-            bool yes = (Char.ToUpper(Console.ReadKey().KeyChar)) == 'Y';
-            if (yes) PizzaCreator(pizza);
+                // add new pizza to list
+                pizza.Id = Program.PizzaID;
+                Program.PizzaList.Add(pizza);
+                pizza.WritePizzasToFile(Program.Path, pizza);
+                Program.PizzaID++;
+                Console.WriteLine("\nWritten to Pizzalist file, would you like to add another one?(Y/N)");
+                yes = (Char.ToUpper(Console.ReadKey().KeyChar)) == 'Y';
+            } while (yes);
+            return;
         }
 
         public void SalesLog()
@@ -99,7 +102,6 @@ namespace WardsPizzeria
             CultureInfo nlBE = CultureInfo.CreateSpecificCulture("nl-BE");
             char yesNo;
             Order o;
-
 
             do
             {
@@ -176,7 +178,7 @@ namespace WardsPizzeria
                         case 'S':
                             validSelection = true;
                             size = PizzaSize.small;
-                            
+
                             break;
 
                         case 'M':
@@ -197,11 +199,11 @@ namespace WardsPizzeria
                 currentOrder.Add(o);
                 Console.CursorLeft = 0;
                 Console.WriteLine("Add another order?(Y/N/)");
-                 yesNo = char.ToUpper(Console.ReadKey().KeyChar);
-            } while(yesNo == 'Y');
-            
+                yesNo = char.ToUpper(Console.ReadKey().KeyChar);
+            } while (yesNo == 'Y');
+
             Program.OrderList.AddRange(currentOrder);
-             o.WriteOrdersToFile(Program.LogPath);
+            o.WriteOrdersToFile(Program.LogPath);
             //       Console.ReadLine();
             // Environment.Exit(0);
             return;
