@@ -35,7 +35,6 @@ namespace WardsPizzeria
         public Pizza() //needed for xml constructor
         {
             Id = Program.PizzaID;
-            Program.PizzaID++;
             Name = "Margherita   ";
             PizzaIngredients = "ingredient1, ingredient2, ...";
             IsVeggie = false;

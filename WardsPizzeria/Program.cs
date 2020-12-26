@@ -7,8 +7,10 @@ namespace WardsPizzeria
 {
     public class Program
     {
-        public static string Path = @"P:\Pizzeria\Pizzalijst.xml";
-        public static string LogPath = @"P:\Pizzeria\Saleslog.xml";
+        //public static string Path = @"P:\Pizzeria\Pizzalijst.xml"; //local links
+        //public static string LogPath = @"P:\Pizzeria\Saleslog.xml";
+        public static string Path = "Pizzalijst.xml"; 
+        public static string LogPath = "Saleslog.xml";
         public static int PizzaID = 0;
         public static List<Pizza> PizzaList { get; set; } = new List<Pizza> { };
         public static List<Order> OrderList { get; set; } = new List<Order> { };

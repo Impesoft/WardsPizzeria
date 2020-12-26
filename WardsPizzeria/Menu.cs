@@ -53,6 +53,7 @@ namespace WardsPizzeria
             do
             {
                 Pizza localPizza = new Pizza();
+                Program.PizzaID++;
 
                 Console.Clear();
                 Console.WriteLine("Pizza Creator:");
@@ -130,7 +131,7 @@ namespace WardsPizzeria
                         //}
                         //else { Console.WriteLine(); }
                     }
-                    Console.WriteLine($"\nWhat would be the pizza of you choice? enter the (number 1 to {Program.PizzaList.Count-1})");
+                    Console.WriteLine($"\nWhat would be the pizza of you choice? enter the (number 1 to {Program.PizzaList.Count})");
                     bool pizzaNotChosen = false;
                     int chosenPizzaId = 0;
                     do
