@@ -22,4 +22,4 @@ Print een mooie rekening op het scherm
 
 put the files PizzaLijst.xml and Sales.log in your my documents folder to get you started with a nice pizza list to chose from and some order to show in the sales log.
 you can however choose to delete both or just the Saleslog, to start from scratch, that'll work too, however keeping only Saleslog, 
-might get you in trouble and doesn't make any sense anyway
+might get you in trouble and doesn't make any sense anyway.
