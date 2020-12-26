@@ -7,8 +7,10 @@ namespace WardsPizzeria
 {
     public class Program
     {
-        public static string Path = @"P:\Pizzeria\Pizzalijst.xml";
-        public static string LogPath = @"P:\Pizzeria\Saleslog.xml";
+        //public static string Path = @"P:\Pizzeria\Pizzalijst.xml"; //local links
+        //public static string LogPath = @"P:\Pizzeria\Saleslog.xml";
+        public static string Path = "Pizzalijst.xml"; 
+        public static string LogPath = "Saleslog.xml";
         public static int PizzaID = 0;
         public static List<Pizza> PizzaList { get; set; } = new List<Pizza> { };
         public static List<Order> OrderList { get; set; } = new List<Order> { };
@@ -32,8 +34,7 @@ namespace WardsPizzeria
                 pizza.ReadPizzasFromFile(Path);
                 PizzaList = PizzaList.OrderBy(p => p.Id).ToList();
 
-                PizzaID = PizzaList[PizzaList.Count-1].Id;
- 
+                PizzaID = PizzaList[PizzaList.Count - 1].Id;
             }
             else
             {
@@ -46,7 +47,7 @@ namespace WardsPizzeria
 
                         // pizzamaker
                         Menu Creator = new Menu();
-                            Creator.PizzaCreator(pizza);
+                        Creator.PizzaCreator(pizza);
 
                         break;
 
