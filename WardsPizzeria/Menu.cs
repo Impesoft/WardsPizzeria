@@ -204,10 +204,18 @@ namespace WardsPizzeria
                 Console.WriteLine("Add another order?(Y/N/)");
                 yesNo = char.ToUpper(Console.ReadKey().KeyChar);
             } while (yesNo == 'Y');
-
+            foreach (Order pizzaOrder in currentOrder)
+            {
+                Console.Write($"Price € {pizzaOrder.Price} ");
+                Console.Write($"{pizzaOrder.OrderedPizza.Name} ({pizzaOrder.Size}) ");
+                Console.Write($"ingrediënten ({pizzaOrder.OrderedPizza.PizzaIngredients})");
+                Console.WriteLine((pizzaOrder.OrderedPizza.IsVeggie ? "(vegetarian)" : ""));
+            }
+            Console.WriteLine($"that's {currentOrder.Count} pizzas for a total of € {(double)currentOrder.Sum(item => item.Price)}");
             Program.OrderList.AddRange(currentOrder);
             o.WriteOrdersToFile(Program.LogPath);
-            //       Console.ReadLine();
+            Console.WriteLine("Order finished, press Enter to return to main menu");
+                   Console.ReadLine();
             // Environment.Exit(0);
             return;
         }
