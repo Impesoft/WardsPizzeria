@@ -215,7 +215,7 @@ namespace WardsPizzeria
             Program.OrderList.AddRange(currentOrder);
             o.WriteOrdersToFile(Program.LogPath);
             Console.WriteLine("Order finished, press Enter to return to main menu");
-                   Console.ReadLine();
+            Console.ReadLine();
             // Environment.Exit(0);
             return;
         }
