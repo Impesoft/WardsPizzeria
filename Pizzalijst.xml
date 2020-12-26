@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPizza xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Pizza>
+    <Id>1</Id>
+    <Name>Margherita</Name>
+    <PizzaIngredients>Kaas, tomatensaus, kruiden</PizzaIngredients>
+    <BasePrice>4.5</BasePrice>
+    <IsVeggie>true</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>2</Id>
+    <Name>Prosciutto</Name>
+    <PizzaIngredients>Kaas, tomatensaus, hesp, kruiden</PizzaIngredients>
+    <BasePrice>4.5</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>3</Id>
+    <Name>Funghi</Name>
+    <PizzaIngredients>Kaas, tomatensaus, champignons, kruiden</PizzaIngredients>
+    <BasePrice>4.5</BasePrice>
+    <IsVeggie>true</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>4</Id>
+    <Name>Peperoni</Name>
+    <PizzaIngredients>Kaas, tomatensaus, pikante salami, pikante pepers, kruiden</PizzaIngredients>
+    <BasePrice>4.5</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>5</Id>
+    <Name>Hawai</Name>
+    <PizzaIngredients>Kaas, tomatensaus, ananas, kip, kruiden</PizzaIngredients>
+    <BasePrice>4.5</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>6</Id>
+    <Name>Tropical</Name>
+    <PizzaIngredients>Kaas, tomatensaus, hesp, kip, ananas, kruiden</PizzaIngredients>
+    <BasePrice>4.5</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>7</Id>
+    <Name>Dolce Vita</Name>
+    <PizzaIngredients>Kaas, tomatensaus, spinazie, ei, kruiden</PizzaIngredients>
+    <BasePrice>4.5</BasePrice>
+    <IsVeggie>true</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>8</Id>
+    <Name>Napolitana</Name>
+    <PizzaIngredients>Kaas, tomatensaus, ansjovis, kappertjes, kruiden</PizzaIngredients>
+    <BasePrice>6.25</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>9</Id>
+    <Name>Michelangelo</Name>
+    <PizzaIngredients>Kaas, tomatensaus, hesp, schijfjes verse tomaat, kruiden</PizzaIngredients>
+    <BasePrice>6.25</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>10</Id>
+    <Name>Roma</Name>
+    <PizzaIngredients>Kaas, tomatensaus, gehakt, kruiden</PizzaIngredients>
+    <BasePrice>6.25</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>11</Id>
+    <Name>Siciliano</Name>
+    <PizzaIngredients>Kaas, tomatensaus, salami, ansjovis, kruiden</PizzaIngredients>
+    <BasePrice>6.25</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>12</Id>
+    <Name>Bolognese</Name>
+    <PizzaIngredients>Kaas, bolognaisesaus, kruiden</PizzaIngredients>
+    <BasePrice>6.25</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>13</Id>
+    <Name>Valentino</Name>
+    <PizzaIngredients>Kaas, tomatensaus, ui, ansjovis, tonijn, kruiden</PizzaIngredients>
+    <BasePrice>7.5</BasePrice>
+    <IsVeggie>false</IsVeggie>
+  </Pizza>
+  <Pizza>
+    <Id>14</Id>
+    <Name>Vegetariana</Name>
+    <PizzaIngredients>Kaas, tomatensaus, ui, paprika, champignons, olijven, maïs, artisjok, kruiden</PizzaIngredients>
+    <BasePrice>8.2</BasePrice>
+    <IsVeggie>true</IsVeggie>
+  </Pizza>
+</ArrayOfPizza>

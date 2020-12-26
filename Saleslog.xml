@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <OrderedPizza>
+      <Id>1</Id>
+      <Name>Margherita</Name>
+      <PizzaIngredients>Kaas, tomatensaus, kruiden</PizzaIngredients>
+      <BasePrice>5</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>large</Size>
+    <Crust>unset</Crust>
+    <Price>6</Price>
+  </Order>
+  <Order>
+    <OrderedPizza>
+      <Id>1</Id>
+      <Name>Margherita</Name>
+      <PizzaIngredients>Kaas, tomatensaus, kruiden</PizzaIngredients>
+      <BasePrice>5</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>medium</Size>
+    <Crust>unset</Crust>
+    <Price>5.5</Price>
+  </Order>
+  <Order>
+    <OrderedPizza>
+      <Id>1</Id>
+      <Name>Margherita</Name>
+      <PizzaIngredients>Kaas, tomatensaus, kruiden</PizzaIngredients>
+      <BasePrice>5</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>small</Size>
+    <Crust>unset</Crust>
+    <Price>5</Price>
+  </Order>
+  <Order>
+    <OrderedPizza>
+      <Id>1</Id>
+      <Name>Margherita</Name>
+      <PizzaIngredients>Kaas, tomatensaus, kruiden</PizzaIngredients>
+      <BasePrice>5</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>large</Size>
+    <Crust>unset</Crust>
+    <Price>6</Price>
+  </Order>
+  <Order>
+    <OrderedPizza>
+      <Id>2</Id>
+      <Name>Funghi</Name>
+      <PizzaIngredients>Kaas, tomatensaus, champignons, kruiden</PizzaIngredients>
+      <BasePrice>6</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>medium</Size>
+    <Crust>unset</Crust>
+    <Price>6.5</Price>
+  </Order>
+  <Order>
+    <OrderedPizza>
+      <Id>2</Id>
+      <Name>Funghi</Name>
+      <PizzaIngredients>Kaas, tomatensaus, champignons, kruiden</PizzaIngredients>
+      <BasePrice>6</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>small</Size>
+    <Crust>unset</Crust>
+    <Price>6</Price>
+  </Order>
+  <Order>
+    <OrderedPizza>
+      <Id>2</Id>
+      <Name>Funghi</Name>
+      <PizzaIngredients>Kaas, tomatensaus, champignons, kruiden</PizzaIngredients>
+      <BasePrice>6</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>large</Size>
+    <Crust>unset</Crust>
+    <Price>7</Price>
+  </Order>
+  <Order>
+    <OrderedPizza>
+      <Id>2</Id>
+      <Name>Funghi</Name>
+      <PizzaIngredients>Kaas, tomatensaus, champignons, kruiden</PizzaIngredients>
+      <BasePrice>6</BasePrice>
+      <IsVeggie>true</IsVeggie>
+    </OrderedPizza>
+    <OrderDate>2020 December 26</OrderDate>
+    <Size>medium</Size>
+    <Crust>unset</Crust>
+    <Price>6.5</Price>
+  </Order>
+</ArrayOfOrder>
