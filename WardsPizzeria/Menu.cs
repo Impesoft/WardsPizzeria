@@ -11,29 +11,20 @@ namespace WardsPizzeria
 
         public Menu()
         {
-            //
         }
 
         public Menu(Pizza pizza)
         {
-            //currentOrder = new List<Order> { };
-
             char chosenKey;
             do
             {
-                Console.Clear();
-                Console.WriteLine("Main Menu");
-                Console.WriteLine("---------\n");
-                Console.WriteLine("(N) Make New pizza." +
-                                "\n(O) Order pizza('s)." +
-                                "\n(L). View saleslog." +
-                                "\n(Q) Quit the application completely");
+                PrintMainMenu();
+                chosenKey = (char.ToUpper(Console.ReadKey().KeyChar));
 
-                chosenKey = (Char.ToUpper(Console.ReadKey().KeyChar));
                 switch (chosenKey)
                 {
                     case 'N':
-                        PizzaCreator(pizza);
+                        CreatePizza(pizza);
                         break;
 
                     case 'O':
@@ -44,12 +35,25 @@ namespace WardsPizzeria
                         SalesLog();
                         break;
                 }
-            } while (chosenKey != 'Q');
+            }
+            while (chosenKey != 'Q');
         }
 
-        public void PizzaCreator(Pizza pizza)
+        private void PrintMainMenu()
         {
-            bool yes;
+            Console.Clear();
+            Console.WriteLine("Main Menu");
+            Console.WriteLine("---------\n");
+            Console.WriteLine("(N) Make New pizza.");
+            Console.WriteLine("(O) Order pizza('s).");
+            Console.WriteLine("(L) View saleslog.");
+            Console.WriteLine("(Q) Quit the application completely.");
+        }
+
+        public void CreatePizza(Pizza pizza)
+        {
+            bool addNewPizza;
+
             do
             {
                 Pizza localPizza = new Pizza();
@@ -59,24 +63,30 @@ namespace WardsPizzeria
                 Console.WriteLine("Pizza Creator:");
                 Console.WriteLine("--------------");
 
-                Console.Write("Give pizza name: ");
+                Console.Write("Pizza name: ");
                 localPizza.Name = Console.ReadLine();
-                Console.Write("Give base pizza price: ");
+
+                Console.Write("Base pizza price: ");
                 localPizza.BasePrice = Convert.ToDouble(Console.ReadLine());
-                Console.Write("Give the ingredients (separted with commas):");
-                string stringIngedients = Console.ReadLine();
-                localPizza.PizzaIngredients = stringIngedients;
+
+                Console.Write("Give the ingredients (separated with commas):");
+                localPizza.PizzaIngredients = Console.ReadLine();
+
                 Console.Write("Veggie (Y/N):");
-                char yesNo = (Char.ToUpper(Console.ReadKey().KeyChar));
-                localPizza.IsVeggie = (yesNo == 'Y');
+                char isVeggie = (char.ToUpper(Console.ReadKey().KeyChar));
+                localPizza.IsVeggie = (isVeggie == 'Y');
 
                 // add new pizza to list
                 localPizza.Id = Program.PizzaID;
                 Program.PizzaList.Add(localPizza);
-                pizza.WritePizzasToFile(Program.Path);
-                Console.WriteLine("\nWritten to Pizzalist file, would you like to add another one?(Y/N)");
-                yes = (Char.ToUpper(Console.ReadKey().KeyChar)) == 'Y';
-            } while (yes);
+                pizza.WritePizzasToFile(GlobalVariables.Path);
+
+                Console.WriteLine();
+                Console.WriteLine("Written to Pizzalist file.");
+                Console.WriteLine("Would you like to add another one ? (Y / N)");
+
+                addNewPizza = char.ToUpper(Console.ReadKey().KeyChar) == 'Y';
+            } while (addNewPizza);
             return;
         }
 
@@ -84,26 +94,28 @@ namespace WardsPizzeria
         {
             Console.Clear();
             Console.WriteLine("Sales log");
-            foreach (Order o in Program.OrderList)
-            {
-                Console.Write(o.OrderDate + ": ");
-                Console.Write($"Price € {o.Price} ");
-                Console.Write($"{o.OrderedPizza.Name} ({o.Size}) ");
-                Console.Write($"ingrediënten ({o.OrderedPizza.PizzaIngredients})");
-                Console.WriteLine((o.OrderedPizza.IsVeggie ? "(vegetarian)" : ""));
-            }
-            Console.WriteLine($"pizzas order for a total of € {(double)Program.OrderList.Sum(item => item.Price)}");
 
+            foreach (Order order in Program.OrderList)
+            {
+                Console.Write($"{order.OrderDate}: ");
+                Console.Write($"Price: €{order.Price} ");
+                Console.Write($"{order.OrderedPizza.Name} ({order.Size}) ");
+                Console.Write($"Ingrediënten:({order.OrderedPizza.PizzaIngredients})");
+                Console.Write(order.OrderedPizza.IsVeggie ? "(vegetarian)" : "");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine($"Pizzas order for a total of € {Program.OrderList.Sum(item => item.Price)}");
             Console.ReadKey();
         }
 
         public void OrderPizzas(Pizza pizza)
         {
-            PizzaSize size = PizzaSize.unset;
-            currentOrder = new List<Order> { };
+            PizzaSize size = PizzaSize.Unset;
+            currentOrder = new List<Order>();
             CultureInfo nlBE = CultureInfo.CreateSpecificCulture("nl-BE");
-            char yesNo;
-            Order o;
+            char addAnotherPizza;
+            Order order;
 
             do
             {
@@ -111,29 +123,15 @@ namespace WardsPizzeria
                 Console.WriteLine("Welcome to our pizzeria:");
                 Console.WriteLine("------------------------");
 
-                if (!(Program.PizzaList == null))
+                if (Program.PizzaList != null)
                 {
-                    Console.WriteLine("Our list of pizzas");
-                    foreach (Pizza loadedpizza in Program.PizzaList)
-                    {
-                        string idString = loadedpizza.Id.ToString("00", nlBE); // use 0.00 for price
-                        Console.Write(idString + "- ");
-                        Console.Write($"Pizza {loadedpizza.Name}");
-                        Console.CursorLeft = 25;
-                        Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
-                        Console.CursorLeft = 100;
-                        string priceString = ((double)loadedpizza.BasePrice).ToString("0.00", nlBE);
-                        Console.Write($"price € {priceString}");
-                        Console.WriteLine((loadedpizza.IsVeggie ? "(vegetarian)" : ""));
-                        //if (loadedpizza.IsVeggie)
-                        //{
-                        //    Console.WriteLine(" (vegeterian)");
-                        //}
-                        //else { Console.WriteLine(); }
-                    }
-                    Console.WriteLine($"\nWhat would be the pizza of you choice? enter the (number 1 to {Program.PizzaList.Count})");
-                    bool pizzaNotChosen = false;
+                    PrintMenu(nlBE);
+
+                    Console.WriteLine();
+                    Console.WriteLine($"What would be the pizza of you choice? enter the (number 1 to {Program.PizzaList.Count})");
+                    bool pizzaNotChosen;
                     int chosenPizzaId = 0;
+                    
                     do
                     {
                         try
@@ -150,7 +148,8 @@ namespace WardsPizzeria
                             Console.SetCursorPosition(0, currentLineCursor);
                             pizzaNotChosen = true;
                         }
-                    } while (pizzaNotChosen && (chosenPizzaId == 0));
+                    }
+                    while (pizzaNotChosen && (chosenPizzaId == 0));
 
                     try
                     {
@@ -169,41 +168,49 @@ namespace WardsPizzeria
                     Console.ReadKey();
                     return;
                 }
-                Console.WriteLine(pizza.Name + " excellent choice, in what size would you like this pizza?");
-                Console.WriteLine($"{(PizzaSize)PizzaSize.large}, {(PizzaSize)PizzaSize.medium} or {(PizzaSize)PizzaSize.small}.(L,M,S)");
+
+                Console.WriteLine($"{pizza.Name} excellent choice, in what size would you like this pizza?");
+                Console.WriteLine($"{PizzaSize.Large}, {PizzaSize.Medium} or {PizzaSize.Small}.(L,M,S)");
                 char pizzaSize;
-                bool validSelection = false;
+                bool isSelectionValid = false;
+
                 do
                 {
-                    pizzaSize = Char.ToUpper(Console.ReadKey().KeyChar);
+                    pizzaSize = char.ToUpper(Console.ReadKey().KeyChar);
                     switch (pizzaSize)
                     {
                         case 'S':
-                            validSelection = true;
-                            size = PizzaSize.small;
+                            isSelectionValid = true;
+                            size = PizzaSize.Small;
 
                             break;
 
                         case 'M':
-                            validSelection = true;
-                            size = PizzaSize.medium;
+                            isSelectionValid = true;
+                            size = PizzaSize.Medium;
                             break;
 
                         case 'L':
-                            validSelection = true;
-                            size = PizzaSize.large;
+                            isSelectionValid = true;
+                            size = PizzaSize.Large;
                             break;
                     }
-                } while (!validSelection);
+                }
+                while (!isSelectionValid);
 
-                o = new Order(pizza, size);
-                o.Price = pizza.BasePrice + ((int)size - 1) * .5;
-                o.OrderDate = DateTime.Now.ToString("yyyy MMMM dd");
-                currentOrder.Add(o);
+                order = new Order(pizza, size)
+                {
+                    Price = pizza.BasePrice + ((int)size - 1) * .5,
+                    OrderDate = DateTime.Now.ToString("yyyy MMMM dd")
+                };
+
+                currentOrder.Add(order);
                 Console.CursorLeft = 0;
                 Console.WriteLine("Add another order?(Y/N/)");
-                yesNo = char.ToUpper(Console.ReadKey().KeyChar);
-            } while (yesNo == 'Y');
+                addAnotherPizza = char.ToUpper(Console.ReadKey().KeyChar);
+            } 
+            while (addAnotherPizza == 'Y');
+
             foreach (Order pizzaOrder in currentOrder)
             {
                 Console.Write($"Price € {pizzaOrder.Price} ");
@@ -213,11 +220,31 @@ namespace WardsPizzeria
             }
             Console.WriteLine($"that's {currentOrder.Count} pizzas for a total of € {(double)currentOrder.Sum(item => item.Price)}");
             Program.OrderList.AddRange(currentOrder);
-            o.WriteOrdersToFile(Program.LogPath);
+            order.WriteOrdersToFile(GlobalVariables.LogPath);
             Console.WriteLine("Order finished, press Enter to return to main menu");
             Console.ReadLine();
-            // Environment.Exit(0);
             return;
+        }
+
+        private void PrintMenu(CultureInfo cultureInfo)
+        {
+            Console.WriteLine("Our list of pizzas");
+
+            foreach (Pizza loadedpizza in Program.PizzaList)
+            {
+                string idString = loadedpizza.Id.ToString("00", cultureInfo); // use 0.00 for price
+                Console.Write(idString + "- ");
+                
+                Console.Write($"Pizza {loadedpizza.Name}");
+                Console.CursorLeft = 25;
+                
+                Console.Write($"ingredients({loadedpizza.PizzaIngredients})");
+                Console.CursorLeft = 100;
+                
+                string priceString = (loadedpizza.BasePrice).ToString("0.00", cultureInfo);
+                Console.Write($"price € {priceString}");
+                Console.WriteLine((loadedpizza.IsVeggie ? "(vegetarian)" : ""));
+            }
         }
     }
 }

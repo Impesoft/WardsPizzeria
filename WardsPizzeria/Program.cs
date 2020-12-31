@@ -7,48 +7,43 @@ namespace WardsPizzeria
 {
     public class Program
     {
-        // set required doc paths
-        public static string Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Pizzalijst.xml";
-
-        public static string LogPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Saleslog.xml";
         public static int PizzaID = 0;
         public static List<Pizza> PizzaList { get; set; } = new List<Pizza> { };
         public static List<Order> OrderList { get; set; } = new List<Order> { };
 
-        // public static Pizza pizza;
         private static void Main(string[] args)
         {
             Console.SetWindowSize(140, 30);
             Console.Title = "Pizza App(Admin)";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            //pizzaList.Add(new Pizza(1, "Margherita", "Kaas, tomatensaus, kruiden", true, 5.0));
             Order order = new Order();
-            if (File.Exists(LogPath))
+
+            if (File.Exists(GlobalVariables.LogPath))
             {
-                order.ReadOrdersFromFile(LogPath);
+                OrderList = order.ReadOrdersFromFile(GlobalVariables.LogPath);
                 OrderList = OrderList.OrderBy(p => p.OrderedPizza.Id).ToList();
             }
-            Pizza pizza = new Pizza();
-            if (File.Exists(Path))
-            {
-                pizza.ReadPizzasFromFile(Path);
-                PizzaList = PizzaList.OrderBy(p => p.Id).ToList();
 
+            Pizza pizza = new Pizza();
+
+            if (File.Exists(GlobalVariables.Path))
+            {
+                PizzaList = pizza.ReadPizzasFromFile(GlobalVariables.Path);
+                PizzaList = PizzaList.OrderBy(p => p.Id).ToList();
                 PizzaID = PizzaList[PizzaList.Count - 1].Id;
             }
             else
             {
-                Console.WriteLine("Currently we don't have any pizza's available for sale...\nDo you want to add some pizza's to the pizzalist?(Y/N)");
+                Console.WriteLine("Currently we don't have any pizza's available for sale...");
+                Console.WriteLine("Do you want to add some pizza's to the pizzalist?(Y/N)");
+                char addNewPizza = char.ToUpper(Console.ReadKey().KeyChar);
 
-                char yesNo = char.ToUpper(Console.ReadKey().KeyChar);
-                switch (yesNo)
+                switch (addNewPizza)
                 {
                     case 'Y':
-
                         // pizzamaker
                         Menu Creator = new Menu();
-                        Creator.PizzaCreator(pizza);
-
+                        Creator.CreatePizza(pizza);
                         break;
 
                     case 'N':
@@ -56,8 +51,7 @@ namespace WardsPizzeria
                         break;
                 }
             }
-            //Console.WriteLine("press any key to continue...");
-            //Console.ReadKey();
+
             Menu menu = new Menu(pizza);
         }
     }
