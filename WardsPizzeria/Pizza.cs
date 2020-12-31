@@ -6,9 +6,7 @@ using System.Xml.Serialization;
 
 namespace WardsPizzeria
 {
-    public enum PizzaSize { unset, small, medium, large };
-
-    public enum PizzaCrust { unset, pan, deep, cheese };
+    
 
     [Serializable()]
     public class Pizza
@@ -20,7 +18,9 @@ namespace WardsPizzeria
         public string Name { get; set; }
 
         public string PizzaIngredients { get; set; }
+
         public double BasePrice { get; set; }
+
         public bool IsVeggie { get; set; }
 
         public Pizza(int id, string name, string ingredients, bool isVeggie, double basePrice)
@@ -41,14 +41,15 @@ namespace WardsPizzeria
             BasePrice = 4.5;
         }
 
-        public void ReadPizzasFromFile(string path)
+        public List<Pizza> ReadPizzasFromFile(string path)
         {
             XmlSerializer toList = new XmlSerializer(typeof(List<Pizza>));
 
             StreamReader reader = new StreamReader(path);
-            Program.PizzaList = (List<Pizza>)toList.Deserialize(reader);
-
+            var list = (List<Pizza>)toList.Deserialize(reader);
             reader.Close();
+
+            return list;
         }
 
         public void WritePizzasToFile(string path)
