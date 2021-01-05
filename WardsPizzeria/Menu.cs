@@ -23,20 +23,20 @@ namespace WardsPizzeria
 
                 switch (chosenKey)
                 {
-                    case 'N':
+                    case 'N':  //New
                         CreatePizza(pizza);
                         break;
 
-                    case 'O':
+                    case 'O': //Order
                         OrderPizzas(pizza);
                         break;
 
-                    case 'L':
+                    case 'L': //SalesLog
                         SalesLog();
                         break;
                 }
             }
-            while (chosenKey != 'Q');
+            while (chosenKey != 'Q'); //Quit
         }
 
         private void PrintMainMenu()
